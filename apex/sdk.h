@@ -83,6 +83,8 @@ class BaseEntity
 
 	OFFSET(m_iSignifierName, uint64_t, OFFSET_SIGN_NAME)
 	OFFSET(m_vecAbsOrigin, Vector, OFFSET_ORIGIN)
+	OFFSET(m_hEntityHandle, uint64_t, OFFSET_ENTITY_HANDLE)
+	OFFSET(m_vecAbsVelocity, Vector, OFFSET_ABS_VELOCITY)
 
 	std::string GetSignifierName()
 	{
@@ -93,12 +95,13 @@ class BaseEntity
 		return std::string(itemName);
 	}
 
-	bool isPlayer()
+	bool IsPlayer()
 	{
-
+		std::string identifier = pMem->Rpm<std::string>(m_hEntityHandle()->fromCache());
+		return strcmp(identifier.c_str(), "player");
 	}
 
-	bool isItem()
+	bool IsItem()
 	{
 
 	}
@@ -108,28 +111,27 @@ public:
 	uint64_t base = NULL;
 };
 
-class Item : BaseEntity
+class BaseItem : BaseEntity
 {
 public:
+		void DoGlow() {
 
+			//Color color; //color based on item level
+			if (pMem->Rpm<int>(base + OFFSET_GLOW_ENABLE) != 1 ||
+				pMem->Rpm<int>(base + OFFSET_GLOW_THROUGH_WALLS) != 2) {
 
-
-		//void DoGlow(Color color) {
-		//	if (pMem->Rpm<int>(base + OFFSET_GLOW_ENABLE) != 1 ||
-		//		pMem->Rpm<int>(base + OFFSET_GLOW_THROUGH_WALLS) != 2) {
-
-		//		pMem->Wpm<int>(base + OFFSET_GLOW_ENABLE, 1);
-		//		pMem->Wpm<int>(base + OFFSET_GLOW_THROUGH_WALLS, 2);
-		//		//pMem->Wpm<GlowMode>(base + GLOW_TYPE, { 101,101,10,50 });
-		//		pMem->Wpm<float>(base + GLOW_COLOR_R, color.r);
-		//		pMem->Wpm<float>(base + GLOW_COLOR_G, color.g);
-		//		pMem->Wpm<float>(base + GLOW_COLOR_B, color.b);
-		//		pMem->Wpm<float>(base + GLOW_DISTANCE, FLT_MAX);
-		//	}
-		//}
+				pMem->Wpm<int>(base + OFFSET_GLOW_ENABLE, 1);
+				pMem->Wpm<int>(base + OFFSET_GLOW_THROUGH_WALLS, 2);
+				//pMem->Wpm<GlowMode>(base + GLOW_TYPE, { 101,101,10,50 });
+				//pMem->Wpm<float>(base + GLOW_COLOR_R, color.r);
+				//pMem->Wpm<float>(base + GLOW_COLOR_G, color.g);
+				//pMem->Wpm<float>(base + GLOW_COLOR_B, color.b);
+				pMem->Wpm<float>(base + GLOW_DISTANCE, FLT_MAX);
+			}
+		}
 };
 
-class Player : BaseEntity
+class BasePlayer : BaseEntity
 {
 public:
 	/*This is the distance to the player believe it or not (from local eyepos)*/
@@ -139,31 +141,18 @@ public:
 	/*cache of positions*/
 	std::deque<Vector> positions;
 
-	/*For comparing player objects and checking for local player*/
-	bool operator==(const Player& player) const { 
-		return player.base == this->base;
-	}
-
-	bool operator!=(const Player& player) const {
-		return player.base != this->base;
-	}
-
 	/*Offsets*/
 	OFFSET(m_fFlags, int, 0x0098)
 	OFFSET(m_iHealth, int, OFFSET_HEALTH)
 	OFFSET(m_iTeamNum, int, OFFSET_TEAM)
 	OFFSET(m_iName, int, OFFSET_NAME)
-	OFFSET(m_iSignifierName, uint64_t, OFFSET_SIGN_NAME)
 	OFFSET(m_flMaxspeed, float, 0x0420)
 
 	OFFSET(m_flLastVisibleTime, float, OFFSET_VISIBLE_TIME)
-	OFFSET(m_vecAbsVelocity, Vector, OFFSET_ABS_VELOCITY)
 	OFFSET(m_vecViewAngles, Vector, OFFSET_VIEWANGLES)
 	OFFSET(m_vecCameraPos, Vector, OFFSET_CAMERAPOS)
 	OFFSET(m_vecAimPunch, Vector, OFFSET_AIMPUNCH)
-	OFFSET(m_vecAbsOrigin, Vector, OFFSET_ORIGIN)
 	OFFSET(m_boneArray, uint64_t, OFFSET_BONES)
-	OFFSET(m_hEntityHandle, uint64_t, OFFSET_ENTITY_HANDLE)
 	OFFSET(m_iBleedOutState, int, OFFSET_BLEED_OUT_STATE);
 	OFFSET(m_bZooming, bool, OFFSET_ZOOMING)
 
@@ -183,14 +172,6 @@ public:
 		Out->y = pMem->Rpm<float>(m_boneArray()->fromCache() + 0xDC + (BoneId * 0x30)) + Origin.y;
 		Out->z = pMem->Rpm<float>(m_boneArray()->fromCache() + 0xEC + (BoneId * 0x30)) + Origin.z;
 		return true;
-	}
-
-	/*This needs to check for ClassId, not just player string, this is a thing in source engine games (Check offset rule)*/
-	bool IsPlayer() {
-		std::string identifier = pMem->Rpm<std::string>(m_hEntityHandle()->fromCache());
-		if (identifier.size() > 0)
-			printf("class name found: %s\n", identifier.c_str());
-		return strcmp(identifier.c_str(), "player");
 	}
 
 	bool IsKnocked() {
