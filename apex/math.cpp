@@ -23,13 +23,14 @@ void Math::LinearSmooth(const Vector& currentAngles, Vector aimAngles, Vector* s
 	Vector3 delta = aimAngles - currentAngles;
 	Math::NormalizeAngles(&delta);
 
-	float divisor = amount;
+	float divisor = fabsf(amount - 1.f);
 
-	if (divisor > 1.0)
+	if (divisor > 0.0)
 	{
-		delta.y = delta.y / divisor;
-		delta.x = delta.x / divisor;
+		delta.y = delta.y * divisor;
+		delta.x = delta.x * divisor;
 	}
+
 	*smoothedAngles = Vector(currentAngles) + delta;
 }
 

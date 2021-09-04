@@ -251,7 +251,7 @@ void Cheat::AimAtBone(Vector localPlayerCameraPos, BasePlayer& target, int bone)
 		{
 			case AimbotModes::TYPE_LINEAR:
 			{
-				Math::LinearSmooth(playerAngles, aimAngle, &smoothedAngle, settings.smoothing);
+				Math::LinearSmooth(playerAngles, aimAngle, &smoothedAngle, settings.smoothing / 100.f);
 
 				if ((int)playerAngles.y == (int)smoothedAngle.y 
 					&& (int)playerAngles.x == (int)smoothedAngle.x)
@@ -300,9 +300,8 @@ void Cheat::Aimbot()
 
 		bool aimKeyDown = keydown(VK_LBUTTON);
 		auto weapon = localPlayer.GetActiveWeapon();
-;
-		if (aimKeyDown && 
-			weapon->m_ammoInClip()->get() > 0 && 
+
+		if (aimKeyDown && weapon->m_ammoInClip()->get() > 0 && 
 			!weapon->m_bInReload()->get())
 		{ 
 
@@ -340,6 +339,7 @@ void Cheat::Aimbot()
 			}
 			else 
 			{
+				
 				BasePlayer closestPlayer;
 				if (bestPlayer(&closestPlayer)) 
 				{

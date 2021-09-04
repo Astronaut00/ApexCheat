@@ -43,14 +43,14 @@ void Cheat::UpdateItems()
 			if (player == localPlayer)
 				continue;
 
-			if (player.m_iTeamNum()->fromCache() ==
+	/*		if (player.m_iTeamNum()->fromCache() ==
 				localPlayer.m_iTeamNum()->fromCache())
-				continue;
+				continue;*/
 
 			if (player.IsValid())
 				newPlayerList.push_back(player);
 
-			Utl::DelayExeuction(10);
+			//Utl::DelayExeuction(10);
 		}
 
 
@@ -130,9 +130,9 @@ void Cheat::UpdatePlayers()
 			if (player == localPlayer)
 				continue;
 
-			if (player.m_iTeamNum()->fromCache() == 
-				localPlayer.m_iTeamNum()->fromCache())
-				continue;
+			//if (player.m_iTeamNum()->fromCache() == 
+			//	localPlayer.m_iTeamNum()->fromCache())
+			//	continue;
 
 			if (player.IsValid())
 				newPlayerList.push_back(player);

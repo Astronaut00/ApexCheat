@@ -106,7 +106,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\Projects\Apex-Cheat\font;D:\Projects\Apex-Cheat\image;D:\Projects\Apex-Cheat\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Projects\Apex-Cheat\font;C:\Users\user\Projects\Apex-Cheat\image;C:\Users\user\Projects\Apex-Cheat\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,7 +143,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\Projects\Apex-Cheat\font;D:\Projects\Apex-Cheat\image;D:\Projects\Apex-Cheat\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Projects\Apex-Cheat\font;C:\Users\user\Projects\Apex-Cheat\image;C:\Users\user\Projects\Apex-Cheat\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

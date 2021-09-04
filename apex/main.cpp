@@ -11,7 +11,7 @@ void Init()
 	{
 
 		auto window_process = Utl::GetWindowProcessID("Apex Legends", "Respawn001");
-		processId = window_process.first;
+		processId = window_process.first;                       
 		window = window_process.second;
 		while (!processId)
 			std::this_thread::sleep_for(5s);

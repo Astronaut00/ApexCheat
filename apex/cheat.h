@@ -15,7 +15,7 @@ enum class AimbotModes : int
 struct Settings
 {
 	float fov = 10;
-	float smoothing = 5;
+	float smoothing = 50;
 
 	bool rage = false;
 	bool marker = false;

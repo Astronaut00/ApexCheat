@@ -68,6 +68,7 @@ private:
 
 class BaseEntity
 {
+public:
 	BaseEntity() {};
 	BaseEntity(uint64_t address) {
 		base = address;
@@ -111,9 +112,13 @@ public:
 	uint64_t base = NULL;
 };
 
-class BaseItem : BaseEntity
+class BaseItem : public BaseEntity
 {
 public:
+		BaseItem() {};
+		BaseItem(uint64_t address) {
+			base = address;
+		};
 		void DoGlow() {
 
 			//Color color; //color based on item level
@@ -131,9 +136,13 @@ public:
 		}
 };
 
-class BasePlayer : BaseEntity
+class BasePlayer : public BaseEntity
 {
 public:
+	BasePlayer() {};
+	BasePlayer(uint64_t address) {
+		base = address;
+	};
 	/*This is the distance to the player believe it or not (from local eyepos)*/
 	float distanceFromLocal = 0; //TODO: Make this into a function instead
 	float fromLocalFov = 0; // LOL THIS IS A MEME, best way to optimize it tho
