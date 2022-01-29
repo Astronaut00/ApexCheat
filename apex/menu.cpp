@@ -21,7 +21,7 @@ void Cheat::Menu()
         ImGui::Image((void*)logo_texture, dimensions);
         ImGui::SameLine();
         ImGui::SetCursorPos(ImVec2(40, 15));
-        ImGui::Text("Exomoon.vip");
+        ImGui::Text("Exomoon");
 
         textMenu->AddMenuItem("Glow", &settings.playerGlow);
         textMenu->AddMenuItem("Box", &settings.playerBox);
