@@ -1,9 +1,15 @@
 # An External Cheat for Apex Legends.
 
-The overlay is created with the revesal of EasyAntiCheat in mind.
+Features:
+- Clean ImGui Menu with arrow key navigation (this was a forced decision from the nature of EAC's overlay detection)
+- EasyAntiCheat Undetected overlay in 2020
+- Glow
+- Aimbot with interesting target selection methods.
+- Apex legends SDK.
+- Offsets class which allows you to fetch recently saved data and cache data to save performance.
 
 Use the offset dumper not created by me to get the new offsets. It will need to be updated.
 
-Cheat is almost 8 months old.
+This Cheat is outdated.
 
 This cheat goes with https://github.com/Astronaut00/DoubleDataPointer
